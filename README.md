@@ -1,2 +1,2 @@
-# space-invaders
-A space invaders emulator using the 8080 processor.
+# chip-8-emulator
+An emulator of the chip-8 VM with ROM loading, sound, and sprite generation.
