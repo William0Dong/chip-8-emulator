@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>  
+#include <time.h>
 
 const unsigned int ADDR_INST_START = 0x200;
 const unsigned int NUM_CHAR = 80;
-const unsigned int ADDR_CHAR_START = 0x50;               
+const unsigned int ADDR_CHAR_START = 0x50;       
+const unsigned int VIDEO_WIDTH = 640;             
+const unsigned int VIDEO_HEIGHT = 320;                 
 
 struct components {
     u_int8_t delayTimer;
@@ -296,7 +298,7 @@ void OP_Cxkk()
 	chip8.registers[Vx] = randomByte() & byte;
 }
 
-void OP_Dxyn(int VIDEO_WIDTH, int VIDEO_HEIGHT)
+void OP_Dxyn()
 {
 	u_int8_t Vx = (chip8.opcode & 0x0F00) >> 8;
 	u_int8_t Vy = (chip8.opcode & 0x00F0) >> 4;
@@ -521,5 +523,41 @@ void OP_Fx65()
 	for (u_int8_t i = 0; i <= Vx; ++i)
 	{
 		chip8.registers[i] = chip8.memory[chip8.index + i];
+	}
+}
+
+void Cycle() {
+
+	chip8.opcode = (chip8.memory[chip8.pc] << 8u) | chip8.memory[chip8.pc + 1];
+
+
+	if (chip8.delayTimer > 0)
+	{
+		--chip8.delayTimer;
+	}
+
+	if (chip8.soundTimer > 0)
+	{
+		--chip8.soundTimer;
+	}
+}
+
+
+void Video() {
+	
+}
+
+void Input() {
+
+}
+
+int main() {
+	Video();
+	Input();
+	Chip8Start();
+	loadRom();
+	while (!exit) {
+		Cycle();
+		KeyState();
 	}
 }
