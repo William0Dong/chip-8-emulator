@@ -12,8 +12,8 @@ const char keyboard_map[CHIP8_TOTAL_KEYS] = {
 
 int main(int argc, char **argv)
 {
-
     struct chip8 chip8;
+    chip8_init(&chip8);
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_Window *window = SDL_CreateWindow(
         EMULATOR_WINDOW_TITLE,
@@ -41,10 +41,9 @@ int main(int argc, char **argv)
                         chip8_keyboard_down(&chip8.keyboard, vkey);
                     }
                 break;
-
                 case SDL_KEYUP:
-                    char key = event.key.keysym.sym;
-                    int vkey = chip8_keyboard_map(keyboard_map, key);
+                    key = event.key.keysym.sym;
+                    vkey = chip8_keyboard_map(keyboard_map, key);
                     if (vkey != -1) {
                         chip8_keyboard_up(&chip8.keyboard, vkey);
                     }
