@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <windows.h>
+#include <time.h>
 #include "SDL2/SDL.h"
 #include "chip8.h"
 #include "chip8keyboard.h"
@@ -14,6 +16,7 @@ int main(int argc, char **argv)
 {
     struct chip8 chip8;
     chip8_init(&chip8);
+    chip8.registers.delay_timer = 60;
 
     chip8_screen_draw_sprite(&chip8.screen, 30, 30, &chip8.memory.memory[0x05], 5);
     SDL_Init(SDL_INIT_EVERYTHING);
@@ -26,6 +29,7 @@ int main(int argc, char **argv)
     );
 
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_TEXTUREACCESS_TARGET);
+    clock_t begin = clock();
     while(1)
     {
         SDL_Event event;
@@ -68,10 +72,20 @@ int main(int argc, char **argv)
             }
         }
         SDL_RenderPresent(renderer);
+        
+        if (chip8.registers.delay_timer > 0) {
+            Sleep(16.66);
+            chip8.registers.delay_timer -= 1;
+
+        } else {
+            goto out;
+        }
 
     }
-
 out:
     SDL_DestroyWindow(window);
+    clock_t end = clock();
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    printf("%f\n", time_spent);
     return 0;
 }
