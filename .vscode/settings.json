@@ -1,7 +1,8 @@
 {
     "files.associations": {
         "sdl.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "chip8keyboard.h": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
