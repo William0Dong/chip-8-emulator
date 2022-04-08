@@ -1,2 +1,0 @@
-Destroy the invaders with your ship. 
-Shoot with 5, move with 4 and 6. Press 5 to begin a game.
