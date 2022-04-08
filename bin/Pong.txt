@@ -1,0 +1,2 @@
+Bounce the ball past the enemy's screen.
+Use keys 7 and 4 to move the left player and / and * to move the right player.
