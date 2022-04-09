@@ -8,6 +8,8 @@
 #include "chip8keyboard.h"
 #include "chip8screen.h"
 #include <stddef.h>
+
+// Declaring virtual hardware
 struct chip8
 {
     struct chip8_memory memory;
@@ -17,6 +19,7 @@ struct chip8
     struct chip8_screen screen;
 };
 
+// Declaring memory related functions
 void chip8_init(struct chip8* chip8);
 void chip8_exec(struct chip8* chip8, unsigned short opcode);
 void chip8_load(struct chip8* chip8, const char* buf, size_t size);

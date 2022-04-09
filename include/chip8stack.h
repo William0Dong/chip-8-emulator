@@ -3,6 +3,8 @@
 #include "config.h"
 
 struct chip8;
+
+// Stack behaves similiarly to the abstract datatype of the same name
 struct chip8_stack
 {
     unsigned short stack[CHIP8_TOTAL_STACK_DEPTH];

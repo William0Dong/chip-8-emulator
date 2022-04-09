@@ -6,18 +6,21 @@ static void chip8_is_memory_in_bounds(int index)
     assert(index >= 0 && index < CHIP8_MEMORY_SIZE);
 }
 
+// Setting a part of memory to a certain value
 void chip8_memory_set(struct chip8_memory* memory, int index, unsigned char val)
 {
     chip8_is_memory_in_bounds(index);
     memory->memory[index] = val;
 }
 
+// Getting the byte of memory at the corresponding index
 unsigned char chip8_memory_get(struct chip8_memory* memory, int index)
 {
     chip8_is_memory_in_bounds(index);
     return memory->memory[index];
 }
 
+// Getting two consecutive bytes from memory and combining them into one element
 unsigned short chip8_memory_get_short(struct chip8_memory* memory, int index)
 {
     unsigned char byte1 = chip8_memory_get(memory, index);
